@@ -145,10 +145,17 @@ const recognition = [
   },
 ]
 
-const pipelineStages = [
-  { name: 'Bronze', note: 'raw ingest', color: 'from-amber-600 to-orange-500' },
-  { name: 'Silver', note: 'clean + conform', color: 'from-slate-400 to-slate-500' },
-  { name: 'Gold', note: 'model + serve', color: 'from-yellow-400 to-amber-400' },
+const scatter = [
+  { x: 4, y: 12, shape: 'rounded-full' },
+  { x: 22, y: 62, shape: 'rotate-45' },
+  { x: 38, y: 18, shape: 'rounded-sm' },
+  { x: 52, y: 72, shape: 'rounded-full' },
+  { x: 66, y: 28, shape: 'rotate-12 rounded-sm' },
+  { x: 84, y: 66, shape: 'rounded-full' },
+  { x: 14, y: 36, shape: 'rounded-sm' },
+  { x: 74, y: 8, shape: 'rotate-45' },
+  { x: 92, y: 34, shape: 'rounded-full' },
+  { x: 46, y: 44, shape: 'rotate-12 rounded-sm' },
 ]
 
 const themeKey = 'portfolio-theme'
@@ -344,44 +351,53 @@ function App() {
                 <Mail size={20} />
               </a>
             </div>
+
+            <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 font-mono text-sm text-slate-500 dark:text-slate-400">
+              {stats.map((stat) => (
+                <li key={stat.label}>
+                  <span className="font-bold text-slate-900 dark:text-white">{stat.value}</span>{' '}
+                  {stat.label}
+                </li>
+              ))}
+            </ul>
           </div>
 
-          <div className="float glass rounded-3xl p-6 shadow-2xl shadow-indigo-500/10" aria-hidden="true">
-            <p className="font-mono text-xs uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">
-              medallion pipeline
+          <div className="float glass rounded-3xl p-8 shadow-2xl shadow-indigo-500/10" aria-hidden="true">
+            <p className="font-mono text-xs uppercase tracking-[0.16em] text-rose-500 dark:text-rose-300">
+              Raw data
             </p>
-            <div className="mt-5 grid gap-2">
-              {pipelineStages.map((stage, index) => (
-                <div key={stage.name}>
-                  <div className="flex items-center gap-4 rounded-2xl bg-slate-900/5 p-4 dark:bg-white/5">
-                    <span
-                      className={`grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br ${stage.color} text-sm font-bold text-white shadow`}
-                    >
-                      {index + 1}
-                    </span>
-                    <div>
-                      <p className="font-semibold text-slate-900 dark:text-white">
-                        {stage.name}
-                      </p>
-                      <p className="font-mono text-xs text-slate-500 dark:text-slate-400">
-                        {stage.note}
-                      </p>
-                    </div>
-                  </div>
-                  {index < pipelineStages.length - 1 && (
-                    <div className="flow-line mx-auto my-1 h-5 w-0.5 bg-gradient-to-b from-transparent via-indigo-500 to-transparent" />
-                  )}
-                </div>
+            <div className="relative mt-3 h-28">
+              {scatter.map((dot, index) => (
+                <span
+                  key={index}
+                  style={{
+                    left: `${dot.x}%`,
+                    top: `${dot.y}%`,
+                    '--delay': `${index * 0.3}s`,
+                  }}
+                  className={`scatter absolute h-3 w-3 bg-rose-400/80 ${dot.shape}`}
+                />
               ))}
             </div>
-            <div className="mt-5 grid grid-cols-3 gap-2 border-t border-slate-300/40 pt-5 dark:border-slate-600/40">
-              {stats.map((stat) => (
-                <div key={stat.label} className="text-center">
-                  <p className="gradient-text text-xl font-extrabold">{stat.value}</p>
-                  <p className="mt-0.5 text-[11px] leading-tight text-slate-500 dark:text-slate-400">
-                    {stat.label}
-                  </p>
-                </div>
+
+            <div className="my-5 flex flex-col items-center gap-2">
+              <div className="flow-line h-10 w-0.5 bg-gradient-to-b from-transparent via-indigo-500 to-transparent" />
+              <span className="rounded-full bg-indigo-500/10 px-4 py-1.5 font-mono text-xs text-indigo-600 dark:text-sky-300">
+                clean + transform
+              </span>
+              <div className="flow-line h-10 w-0.5 bg-gradient-to-b from-transparent via-indigo-500 to-transparent" />
+            </div>
+
+            <p className="font-mono text-xs uppercase tracking-[0.16em] text-emerald-600 dark:text-emerald-300">
+              Business ready
+            </p>
+            <div className="mt-3 flex h-28 items-end gap-3">
+              {[38, 55, 48, 72, 64, 90].map((height, index) => (
+                <span
+                  key={index}
+                  style={{ height: `${height}%`, '--delay': `${index * 0.15}s` }}
+                  className="bar flex-1 rounded-t-lg bg-gradient-to-t from-sky-500 to-indigo-500"
+                />
               ))}
             </div>
           </div>

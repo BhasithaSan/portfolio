@@ -234,3 +234,33 @@ body {
     row-gap: 1rem;
   }
 }
+
+/* Raw-to-clean data visual */
+.scatter {
+  animation: scatter 5s ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes scatter {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(8px, -6px); }
+  66% { transform: translate(-6px, 6px); }
+}
+
+.bar {
+  transform-origin: bottom;
+  animation: grow 3.6s ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes grow {
+  0%, 100% { transform: scaleY(0.8); }
+  50% { transform: scaleY(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scatter,
+  .bar {
+    animation: none;
+  }
+}
