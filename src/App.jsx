@@ -604,10 +604,11 @@ function App() {
             </div>
           </div>
 
-          <p className="mt-8 text-center font-mono text-xs text-slate-500 dark:text-slate-400">
-            Bhasitha Sandil / Sri Lanka
-          </p>
         </section>
+
+        <footer className="border-t border-slate-300/50 pt-6 text-center font-mono text-xs text-slate-500 dark:border-slate-700/60 dark:text-slate-400">
+          <p>&copy; 2026 Bhasitha Sandil. All rights reserved.</p>
+        </footer>
       </div>
     </>
   )
